@@ -1,0 +1,31 @@
+name: Python Autograding
+on: [push]
+
+jobs:
+  grading-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Run student exercises
+        run: |
+          # Running the specific file name provided
+          python PE7exercises.py > result.txt
+          
+          # Show the table in the console for the student to see
+          cat result.txt
+          
+          # Search for the fail emoji in the output file
+          if grep -q "❌ FAIL" result.txt; then
+            echo "Results: Some tests did not pass."
+            exit 1
+          else
+            echo "Results: All tests passed successfully!"
+            exit 0
+          fi
