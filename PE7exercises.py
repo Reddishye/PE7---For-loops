@@ -57,7 +57,8 @@ def find_max():
     current_max = nums[0]
     # TODO: Iterate through the list
     for num in nums:
-
+        pass # change this
+    
     return current_max
 
 # ==========================================
